@@ -6,7 +6,7 @@ _UnityVGDL_ provides a list of scenes, for various purposes.
 
 ![alt text](images/Scenes.png)
 
-#### Learning Scenes
+### Learning Scenes
 
 The learning scenes are setup to be used for [training](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-ML-Agents.md), they can be used either directly from the editor or built into executables and used as [learning environments](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Design.md).
 
@@ -14,15 +14,15 @@ The learning scenes are setup to be used for [training](https://github.com/Unity
 
 The scenes are setup with 1, 2, 4, 8, 12 and 16 game instances respectively. The ML-Agents python interface can create multiple environment instances (executables), to take advantage of multiple cores when training. To optimally exploit the CPU cores, use a learning scene that uses around 100% of one core, and then use the ML-Agents python interface to spawn an environment for each availble core.
 
-#### Evaluation Scenes
+### Evaluation Scenes
 
 The evaluation scenes can be used to play vgdl games, as a Player (_VGDL Evaluate Player_), with scripted behavior (_VGDL Evaluate Heuristic_) or using a trained brain with inference (_VGDL Evaluate Learning_).
 
-### Setting up the scenes
+## Setting up the scenes
 
 As a general rule in every scene you have to change which VGDL game(s) to use. This is setup on the **VGDL Academy** for all scenes except the test scene.
 
-#### VGDL Academy
+### VGDL Academy
 
 The _VGDL Academy_ extends the [ML-Agent Academy](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Design-Academy.md), they control the _VGDL Agent_ instantiation, and the list of games used for training/playing. 
 
@@ -34,7 +34,7 @@ In case of training the _Control_ checkmark has to be on, allowing the ml-agent 
 
 In the evaluation scenes, the _Control_ checkmark is off, which allows the Academy to setup inference of a trained brain.
 
-##### VGDL games/levels to train on
+#### VGDL games/levels to train on
 
 This section of the VGDLAcademy controls the game(s) used for playing/training in the scene.
 
@@ -46,7 +46,7 @@ _Current Repetition_ is used to determine when procede to a new game/level, base
 
 The curriculum is a partically implemented version of the [ml-agents curriculum settings](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-Curriculum-Learning.md). The system is not integrated with the curriculum learning in ml-agents.
 
-###### Elements in the Curriculum consists of the following
+##### Elements in the Curriculum consists of the following
 
 _Type_ is game type [__Grid Physics, Continuous Physics, *Two-Player*__]. (Two-Player games current not fully implemented)
 
@@ -62,7 +62,7 @@ _Min Lesson Length_ how many times should the game/level be repeated before a ne
 
 ~~Signal Smoothing~~ curently unused
 
-#### VGDL Agent
+### VGDL Agent
 
 ![alt text](images/VGDLAgent.png)
 
@@ -78,7 +78,7 @@ _Descision Interval_ functions like "skip frames", observations will only be col
 
 _Step Reward_ can be used to provide a reward at each step, such as a small negative reward, to encurage agent to explore the state space more.
 
-##### VGDL Runner
+### VGDL Runner
 
 ![alt text](images/VGDLRunner.png)
 
@@ -96,7 +96,7 @@ _Number of Runs To Evaluate_ Once this number is reached, the runner stops updat
 
 The rest of the values function as debug info.
 
-### VGDL Test Scene
+## VGDL Test Scene
 
 The VGDL Test Scene was used heavily during development, it parses (and runs) either one or more VGDL games from the examples.
 
@@ -128,4 +128,7 @@ To [build an executable](https://docs.unity3d.com/Manual/PublishingBuilds.html) 
 
 Once the executable has been built, you can use it with the ml-agents python interface by setting the _'env'_ parameter on the trainer.
 
+## Training
+
+Follow the Instructions of the [ML-Agents Framework](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/ML-Agents-Overview.md) for [training](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-ML-Agents.md).
 

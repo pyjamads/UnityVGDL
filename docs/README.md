@@ -1,11 +1,10 @@
 # UnityVGDL
 
-
 A Video Game Description Language (VGDL) Implementation in Unity of the GVGAI VGDL ontology (https://github.com/GAIGResearch/GVGAI)
 
 ## Contribution
 
-[Contribution guidelines for this project](docs/CONTRIBUTING.md)
+[Contribution guidelines for this project](CONTRIBUTING.md)
 
 ## Installation 
 
@@ -18,7 +17,7 @@ A Video Game Description Language (VGDL) Implementation in Unity of the GVGAI VG
 3. (b) Alternatively you can setup UnityVGDL as a [sub-module](https://git-scm.com/book/en/v2/Git-Tools-Submodules) in your personal fork of ML-Agents. https://github.blog/2016-02-01-working-with-submodules/
 
 ###### Project Outline
-![alt text](docs/images/Project_outline.png)
+![alt text](images/Project_outline.png)
 
 4. Run Unity and open the UnitySDK project.
 
@@ -26,4 +25,4 @@ A Video Game Description Language (VGDL) Implementation in Unity of the GVGAI VG
 
 ## Usage
 
-[Documentation for using the UnityVGDL framework](docs/USAGE.md)
+[Documentation for using the UnityVGDL framework](USAGE.md)
