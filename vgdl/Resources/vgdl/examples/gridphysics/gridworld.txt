@@ -1,0 +1,23 @@
+BasicGame
+    SpriteSet
+        floor > Immovable color=DARKGRAY
+        wall > Immovable color=GRAY
+        pit > Immovable color=LIGHTRED
+        goal > Immovable color=LIGHTGREEN
+        avatar > MovingAvatar speed=1.0 color=LIGHTBLUE
+
+    LevelMapping
+        A > avatar floor
+        g > goal floor
+        p > pit floor
+        . > floor
+
+    InteractionSet
+        avatar EOS > stepBack
+        goal avatar > killSprite scoreChange=1
+        avatar pit > killSprite scoreChange=-1
+
+    TerminationSet
+        SpriteCounter stype=avatar limit=0 win=False
+        SpriteCounter stype=goal limit=0 win=True
+        Timeout limit=100 win=False

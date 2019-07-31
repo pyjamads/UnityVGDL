@@ -1,0 +1,85 @@
+BasicGame square_size=40
+    SpriteSet
+        grass > Immovable color=GREEN img=oryx/grass autotiling=true
+        snow > Immovable color=WHITE img=newset/snowmanbase
+        dirt > Immovable color=BROWN img=oryx/backLBrown
+        
+        snowmandone >
+            bodydone > Immovable img=newset/snowmanbodyinplace
+            chestdone > Immovable img=newset/snowmanchestinplace
+            headdone > Immovable
+                headdone1 > img=newset/snowmanheadinplace
+                headdone2 > img=newset/snowmanheadinplace2
+
+        partial >
+            bodyandhead > Immovable img=newset/snowmanwrong #FIX sprite body+head
+            chestandhead > Immovable img=newset/snowmanwrong #FIX sprite chest+head
+            bodyandchest > Immovable img=newset/snowmanwrong #FIX sprite body+chest
+
+        snowball >
+            body > Passive img=newset/snowmanbody
+            chest > Passive img=newset/snowmanchest
+            head > Passive img=newset/snowmanhead
+        
+        avatar > MovingAvatar img=oryx/ghost2
+
+        wall > Immovable img=oryx/bush1
+        tree > Immovable img=oryx/tree2
+    LevelMapping
+        b > grass body
+        B > snow body
+
+        c > grass chest
+        C > snow chest
+
+        h > grass head
+        H > snow head  
+
+        t > dirt tree
+        w > dirt wall
+
+        A > grass avatar
+        Å > snow avatar
+
+        . > grass
+        * > snow
+        … > dirt
+    InteractionSet
+        avatar wall tree snowmandone partial > stepBack
+
+        snowball avatar > bounceForward
+        snowball snowmandone wall tree > undoAll
+
+        ##NOTE BODY => SNOWBALL should be banned...
+        body body head partial > undoAll
+        chest chest partial > undoAll
+        head head bodyandhead chestandhead > undoAll
+
+        ###split partial snowman
+        #NOTE UNDO: the splitting up mechanic needs a spwanInFront.
+        #bodyandhead avatar > spawn stype=head #and bump forward
+        #bodyandhead avatar > spawn stype=body
+        #bodyandhead avatar > killSprite
+        
+        #note until we get splitting these are dead, so we don't allow them
+        #head chest > transformTo stype=chestandhead killSecond=true
+        #head body > transformTo stype=bodyandhead killSecond=true
+        head chest > undoAll
+        head body > undoAll
+
+        ###grow snowballs
+        head snow > transformTo stype=chest
+        chest snow > transformTo stype=body
+        
+        ###remove snow
+        snow snowball > transformTo stype=grass
+
+        ###make snowman
+        chest body > transformTo stype=bodyandchest killSecond=true scoreChange=1
+
+        bodyandchest head > transformTo stype=bodydone 
+        bodyandchest head > spawn stype=chestdone
+        head bodyandchest > transformToRandomChild stype=headdone scoreChange=1
+        
+    TerminationSet
+        SpriteCounter stype=snowball limit=0 win=True
