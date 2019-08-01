@@ -9,7 +9,7 @@
   * Alternatively you can setup UnityVGDL as a [sub-module](https://git-scm.com/book/en/v2/Git-Tools-Submodules) in your personal fork of ML-Agents. https://github.blog/2016-02-01-working-with-submodules/
 
 ###### Project Outline
-![alt text](docs/images/Project_outline.png)
+![alt text](images/Project_outline.png)
 
 4. Run Unity and open the UnitySDK project.
 
