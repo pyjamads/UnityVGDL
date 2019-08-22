@@ -1,12 +1,12 @@
 # UnityVGDL
 
-A Video Game Description Language (VGDL) Implementation in Unity of the GVGAI VGDL ontology (https://github.com/GAIGResearch/GVGAI)
+An implementation of the [GVGAI](https://github.com/GAIGResearch/GVGAI) Video Game Description Language (VGDL) in the Unity game engine.
 
 ## Citation
 
 If you use UnityVGDL to conduct research, we ask that you cite the following paper as a reference:
 
-Mads Johansen, Martin Pichlmair and Sebastian Risi (2019). Video Game Description Language Environment for Unity Machine Learning Agents. In: Proceedings of the IEEE Conference on Games (CoG) 2019. http://ieee-cog.org/papers/paper_209.pdf. https://github.com/pyjamads/UnityVGDL.
+Mads Johansen, Martin Pichlmair and Sebastian Risi (2019). Video Game Description Language Environment for Unity Machine Learning Agents. In: Proceedings of the IEEE Conference on Games (CoG) 2019. http://ieee-cog.org/papers/paper_209.pdf.
 
 ## Installation 
 
