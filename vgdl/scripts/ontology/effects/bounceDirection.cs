@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using UnityEditor.Experimental.UIElements.GraphView;
 using UnityEngine;
 
 public class bounceDirection : VGDLEffect
