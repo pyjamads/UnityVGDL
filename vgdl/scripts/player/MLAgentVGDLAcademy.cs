@@ -13,8 +13,8 @@ public class MLAgentVGDLAcademy : Academy {
 	[Tooltip("Currently training on Index")]
 	public int CurrentIndex;
 	
-	[Tooltip("Current repetition")]
-	public int CurrentRepetition;
+	//[Tooltip("Current repetition")]
+	//public int CurrentRepetition;
 	
 	[Tooltip("Curriculum to train on")] 
 	public VGDLGameAndLevelForTraining[] Curriculum;
@@ -25,31 +25,32 @@ public class MLAgentVGDLAcademy : Academy {
 	public VGDLGameAndLevel GetNextGameAndLevel()
 	{
 		//TODO: hook into the curriculum system in MLAgents?
-		//TODO: use all the features of our curriculum (which is basically the same as the MLAgent features).
-		if (CurrentRepetition > Curriculum[CurrentIndex].minLessonLength)
-		{
-			CurrentRepetition = 0;
+		//TODO: use the features of our curriculum (which is basically the same as the MLAgent features).
+		//if (CurrentRepetition > Curriculum[CurrentIndex].minLessonLength)
+		//{
+		//	CurrentRepetition = 0;
 			
-			//Select next game+level
-			if (RandomOrder)
-			{
-				CurrentIndex = Random.Range(0, Curriculum.Length);
-			}
-			else
-			{
-				CurrentIndex++;
-				if (CurrentIndex == Curriculum.Length)
-				{
-					CurrentIndex = 0;
-					Done();
-				}
-			}
+		//Select next game+level
+		if (RandomOrder)
+		{
+			CurrentIndex = Random.Range(0, Curriculum.Length);
 		}
 		else
 		{
-			//Update repetition count and return the current game+level.
-			CurrentRepetition++;
+			CurrentIndex++;
+			if (CurrentIndex == Curriculum.Length)
+			{
+				CurrentIndex = 0;
+				//Done();
+			}
 		}
+
+		//}
+		// else
+		// {
+		// 	//Update repetition count and return the current game+level.
+		// 	CurrentRepetition++;
+		// }
 		
 		return Curriculum[CurrentIndex];
 	}
