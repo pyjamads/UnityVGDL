@@ -1,0 +1,95 @@
+(*
+
+  EBNF for VGDL
+  ==========================
+  
+  Notation note: for classes defined in the ontology, 
+  classes will be noted as special-symbol: **?class?**
+  
+*)
+
+(* 
+  Game Definition
+========================== *)
+
+game =  ?game class?,  eol, indent, gameBlocks, [ levelSetBlock ];
+
+gameBlocks = spriteSetBlock, interactionSetBlock, terminationSetBlock, levelMappingBlock;
+
+(* 
+  Sprite Definition
+  Game Objects are called sprites in VGDL
+  Defines which game objects can be created in the game.
+========================== *)
+
+spriteSetBlock = "SpriteSet", eol, indent, {spriteDef, eol}, dedent;
+spriteDef = spriteSimple, [eol, indent, {spriteDef, eol}, dedent];
+spriteSimple = spriteType, " >", [" ", ?sprite class? ], [{" ", option}];
+
+spriteType = identifier | "avatar" | "wall";
+identifier = letter, [{letter, digit, "_", "-"}];
+
+option = ?field?, "=", ( spriteType | ?evaluable?); (* Fields are defined by the class the options are related to. The spriteType here has to be defined in the spriteSetBlock. Evaluable can be strings, integer, float, BOOL (TRUE | FALSE), DIRECITONS (UP | DOWN | LEFT | RIGHT), Colors (WHITE, BLACK, GRAY, ORANGE...) and other things the parser can evaluate.*)
+
+(* 
+  Interaction Definition
+  Defines what happens when objects collide when the game is running.
+========================== *)
+
+interactionSetBlock = "InteractionSet", eol, indent, {interactionDef, eol}, dedent;
+interactionDef = spriteType, " ", spriteType, [{" ", spriteType}], " > ", ?interaction class?, [{" ", option}]; (* spriteTypes have to be defined in the spriteSetBlock.*)
+
+(* 
+  Termination Definition
+  Defines when a level is over, either producing a failure or win state.
+========================== *)
+
+terminationSetBlock = "TerminationSet", eol, indent, {terminationDef, eol}, dedent;
+terminationDef = ?termination class?, [{" ", option}];
+
+(* 
+  Level Mapping Definition
+  Defines which objects to spawn based on the characters in the Levels.
+========================== *)
+
+levelMappingBlock = "LevelMapping", eol, indent, {charMap, eol}, dedent;
+charMap = char, " > ", spriteType, [{" ", spriteType}];
+
+
+(*
+  Basic components
+  ----------------
+  These are low level components, the small building blocks.
+*)
+
+indent = ?->?; (* '->' means a indentation level increase *)
+
+dedent = ?<-?; (* '<-' means a indentation level decrease *)
+
+eol = { whitespace }, comment, newline;
+
+char = letter | digit | punctuation | specialCharacters;
+
+comment = ["#", [{ char | symbol }] ];
+
+whitespace = [{" " | "\t"}];
+
+newline = "\n";
+
+letter = "A" | "B" | "C" | "D" | "E" | "F" | "G"
+       | "H" | "I" | "J" | "K" | "L" | "M" | "N"
+       | "O" | "P" | "Q" | "R" | "S" | "T" | "U"
+       | "V" | "W" | "X" | "Y" | "Z" | "a" | "b"
+       | "c" | "d" | "e" | "f" | "g" | "h" | "i"
+       | "j" | "k" | "l" | "m" | "n" | "o" | "p"
+       | "q" | "r" | "s" | "t" | "u" | "v" | "w"
+       | "x" | "y" | "z" ;
+
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+
+symbol = "[" | "]" | "{" | "}" | "(" | ")" | "<" | ">" | "'" | '"';
+
+punctuation = "." | "," | ":" | ";";
+
+specialCharacters = "$" | "!" | "%" | "&" | "/" | "\" | "=" 
+            | "?" | "+" | "-" | "^" | "~" | "*" | "@" | "_";
