@@ -134,7 +134,7 @@ transformToRandomChild stype=#spriteType#
 updateSpawnType stype=#spriteType# spawnPoint=???
 removeScore stype=#spriteType#
 addHealthPoints value=#random0-5#
-addHealthPointsToMax value= increaseSpeedToAllc
+addHealthPointsToMax value=#random0-5#
 subtractHealthPoints value=#random0-5# stype=#spriteType#
 increaseSpeedToAll value=#random0-5# stype=#spriteType#
 decreaseSpeedToAll value=#random0-5# stype=#spriteType#
@@ -155,7 +155,6 @@ changeResource resource=#resourceType# value=#random1-5#
 
 [scoreChange]
 scoreChange=#random0-5#
-scoreChange=#random0-5#,#random0-5#
 
 \\ ===========================================================
 \\ TERMINATION
