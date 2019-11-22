@@ -1,6 +1,4 @@
 \\ TODO:
-\\ - .? is not integrated yet
-\\ - Level mapping does not fully follow capitalisation rule for avatars
 \\ - Only set number of sprites and resources allowed
 
 
@@ -26,7 +24,7 @@ BasicGame key_handler=Pulse square_size=50 no_players=1
 \\ ===========================================================
 
 [spriteSetBlock]
-SpriteSet #.n# #spriteDefs#
+SpriteSet #.n# #avatarSpriteDef.n.t# #spriteDefs#
 
 \\ we always specify all 5 sprites for now
 [spriteDefs]
@@ -36,10 +34,14 @@ SpriteSet #.n# #spriteDefs#
 #spriteDef.n.t##spriteDef.n.t##spriteDef.n.t.t##spriteDef.n.t.t##spriteDef.n.t.t#
 
 [spriteDef]
-[type:#spriteType#] #type# > img=#type#
-[type:#spriteType#] #type# > img=#type# #spriteAttribute#
-[type:#spriteType#] #type# > img=#type# #spriteAttribute# #spriteAttribute#
-[type:#spriteType#] #type# > img=#type# #spriteAttribute# #spriteAttribute# #spriteAttribute#
+[type:#nonAvatarSpriteType#] #type# > img=#type#
+[type:#nonAvatarSpriteType#] #type# > img=#type# #spriteAttribute#
+[type:#nonAvatarSpriteType#] #type# > img=#type# #spriteAttribute# #spriteAttribute#
+[type:#nonAvatarSpriteType#] #type# > img=#type# #spriteAttribute# #spriteAttribute# #spriteAttribute#
+
+[avatarSpriteDef]
+[type:#avatarSpriteType#] #type# > img=#type# #spriteAttribute#
+[type:#avatarSpriteType#] #type# > img=#type# #spriteAttribute# #spriteAttribute#
 
 [spriteAttribute]
 color=#colour#
@@ -52,12 +54,21 @@ speed=#randomFloat0-9#
 orientation=#orientation#
 rotateInPlace=#bool#
 
-[spriteType]
+[avatarSpriteType]
 avatar
+
+[nonAvatarSpriteType]
 wall
 hole
 ground
-box
+crate
+banana
+racoon
+pantaloon
+
+[spriteType]
+#avatarSpriteType#
+#nonAvatarSpriteType#
 
 [resourceType]
 points
@@ -191,18 +202,25 @@ limit=#random5-10#
 \\ ===========================================================
 
 [levelMappingBlock]
-LevelMapping #.n# #avatarMapping.n.t# #levelMappings#
+LevelMapping #.n# #levelMappings#
 
 [levelMappings]
-#levelMapping.n.t#
+#levelMapping.n.t##levelMapping.n.t##levelMapping.n.t#
 #levelMapping.n.t##levelMappings#
-
-[avatarMapping]
-A > avatar
+#levelMapping.n.t##levelMapping.n.t##levelMappings#
 
 [levelMapping]
-#character# > #spriteType# #spriteType#
+#avatarMapping#
+#nonAvatarMapping#
 
+[avatarMapping]
+#Char# > #avatarSpriteType#
+#Char# > #avatarSpriteType# #nonAvatarSpriteType#
+#Char# > #avatarSpriteType# #nonAvatarSpriteType#
+#Char# > #avatarSpriteType# #nonAvatarSpriteType#
+
+[nonAvatarMapping]
+#character# > #nonAvatarSpriteType#
 
 \\ ===========================================================
 \\ UTILITY FUNCTIONS
@@ -253,15 +271,19 @@ A > avatar
 True
 False
 
+[Char]
+A
+T
+Y
+Z
+Q
+
 [character]
 w
 x
 o
 b
 e
-.
-_
-+
 
 
 [orientation]
